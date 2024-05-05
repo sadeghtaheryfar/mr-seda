@@ -1,0 +1,120 @@
+/* defult css .................................................................................................................. */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body{
+    overflow-x: hidden !important;
+    background-color: #121212;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Vazirmatn, sans-serif;
+}
+
+
+main{
+    overflow-x: hidden !important;
+}
+
+
+.hide-pc{
+    display: none !important;
+}
+
+
+.hide-mobile{
+    display: flex !important;
+}
+
+
+input:focus{
+    outline: none;
+}
+
+
+textarea:focus{
+    outline: none;
+}
+
+/* .......................................................................................................................... */
+
+#main-header{
+    height: 4.5rem;
+    width: 100vw;
+    border-bottom: 1px solid #262626;
+    background-color: #121212;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+
+
+#sidbar-main{
+    height: 100vh;
+    width: 17rem;
+    border-left: 1px solid #262626;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #121212;
+    z-index: 100;
+    transition: 0.5s;
+    overflow-y: auto;
+}
+
+
+#sidbar-main-mobile{
+    display: none;
+}
+
+
+#home-main{
+    width: calc(100vw - 17rem);
+    height: calc(100vh - 4.5rem);
+    margin-top: 4.5rem;
+    margin-right: 17rem;
+}
+
+
+@media screen and (max-width:1024px) {
+    #main-header{
+        height: 9.25rem;
+    }
+
+    #sidbar-main{
+        display: none;
+    }
+
+
+    .active-sidbar-mobile{
+        right: 0 !important;
+    }
+
+
+    #sidbar-main-mobile{
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        border-left: 1px solid #262626;
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        z-index: 99;
+        background-color: #121212;
+        z-index: 100;
+        transition: 0.5s;
+        overflow-y: auto;
+    }
+
+    #home-main{
+        width: 100vw;
+        height: calc(100vh - 9.5rem);
+        margin-top: 9.5rem;
+        margin-right: 0rem;
+    }
+}
