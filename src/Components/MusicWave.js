@@ -12,12 +12,15 @@ const fetchAudioUrl = async (apiUrl) => {
   return objectURL;
 };
 
-const MusicWave = ({ apiUrl }) => {
+const MusicWave = ({ apiUrl,id }) => {
   const {
     data: audioUrl,
     error,
     isLoading,
-  } = useQuery(["audioUrl", apiUrl], () => fetchAudioUrl(apiUrl));
+  } = useQuery(["audioUrl", apiUrl], () => fetchAudioUrl(apiUrl),{
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
 
   useEffect(() => {
     if (error) {
@@ -29,24 +32,28 @@ const MusicWave = ({ apiUrl }) => {
   }, [audioUrl, error]);
 
   const createWave = (audioUrl) => {
-    const wavesurfer = WaveSurfer.create({
-      container: "#waveform3",
-      waveColor: "#434343",
-      progressColor: "#1DB954",
-      barWidth: 3,
-      barRadius: 100,
-      cursorWidth: 0,
-      height: 100,
-      backend: "MediaElement",
-      interact: false, // Disable user interaction
-    });
-
-    wavesurfer.load(audioUrl);
+    var waveform = document.getElementById("waveform" + id);
+    if(!waveform.children.length > 0)
+    {
+      const wavesurfer = WaveSurfer.create({
+        container: "#waveform" + id,
+        waveColor: "#434343",
+        progressColor: "#1DB954",
+        barWidth: 3,
+        barRadius: 100,
+        cursorWidth: 0,
+        height: 80,
+        backend: "MediaElement",
+        interact: false, // Disable user interaction
+      });
+  
+      wavesurfer.load(audioUrl);
+    }
   };
 
   return (
-    <div>
-      <div id="waveform3"></div>
+    <div className="w-full">
+      <div id={"waveform" + id}></div>
     </div>
   );
 };

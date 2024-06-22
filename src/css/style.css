@@ -39,6 +39,30 @@ textarea:focus{
     outline: none;
 }
 
+
+#home-main::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 100px;
+}
+
+
+#home-main::-webkit-scrollbar-track {
+    background: #262626;
+    border-radius: 100px;
+}
+
+
+#home-main::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 100px;
+}
+
+
+#home-main::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 100px;
+}
+
 /* .......................................................................................................................... */
 
 #main-header{
@@ -56,6 +80,7 @@ textarea:focus{
 #sidbar-main{
     height: 100vh;
     width: 17rem;
+    padding-bottom: 5rem;
     border-left: 1px solid #262626;
     position: fixed;
     top: 0;
@@ -78,6 +103,31 @@ textarea:focus{
     height: calc(100vh - 4.5rem);
     margin-top: 4.5rem;
     margin-right: 17rem;
+    padding-bottom: 5rem
+}
+
+
+#box-music-popup{
+    width: 100vw;
+    height: 5rem;
+    padding: 0rem 1rem;
+    border-top: 1px solid #434343;
+    position: fixed;
+    bottom: -5rem;
+    right: 0;
+    background-color: #1F1F1F;
+    z-index: 100;
+    transition: 0.5s;
+}
+
+
+.active-music-popup{
+    bottom: 0 !important;
+}
+
+
+.hover-svg-green svg path{
+    fill: #1DB954;
 }
 
 
