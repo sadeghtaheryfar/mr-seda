@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WaveSurfer from 'wavesurfer.js';
+import LodingTop from './LodingTop';
 
 const BoxMusicPlayer = ({ songs }) => {
     const wavesurferRef = useRef(null);
@@ -16,6 +17,7 @@ const BoxMusicPlayer = ({ songs }) => {
     useEffect(() => {
         if (songs.length === 0) return;
         document.getElementById('box-music-popup').classList.remove('active-music-popup');
+        document.getElementById('box-loding-music').classList.remove('hidden');
 
         initializeWaveSurfer();
 
@@ -42,6 +44,7 @@ const BoxMusicPlayer = ({ songs }) => {
             setDuration(wavesurferRef.current.getDuration());
             setIsLoading(false);
             document.getElementById('box-music-popup').classList.add('active-music-popup');
+            document.getElementById('box-loding-music').classList.add('hidden');
         });
 
         wavesurferRef.current.on('audioprocess', () => {
@@ -139,6 +142,10 @@ const BoxMusicPlayer = ({ songs }) => {
 
     return (
         <>
+            <div id='box-loding-music'>
+                <LodingTop />
+            </div>
+
             <section id='box-music-popup' className='flex items-center'>
                 <div className='flex items-center'>
                     <Link className='text-[#1F1F1F] w-[8rem] h-min bg-[#1DB954] flex items-center justify-center px-[1rem] py-[0.5rem] rounded-full'>

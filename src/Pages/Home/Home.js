@@ -19,7 +19,7 @@ const fetchData = async (postid) => {
         redirect: "follow"
     };
 
-    const response = await fetch('https://api.mrseda.com//api/v1/sounds?per_page=5&page=1&direction=desc', requestOptions);
+    const response = await fetch('https://api.mrseda.com/api/v1/sounds?per_page=5&page=1&direction=desc', requestOptions);
     if (!response.ok) {
         throw new Error('Failed to fetch data');
     }
@@ -46,6 +46,21 @@ const Home = () => {
         });
 
         setMusics(arrayOfObjects);
+    }
+
+
+    var btnCategoryMusicMobile = document.querySelectorAll('.btn-category-music-mobile');
+    var boxCategoryMobile = document.getElementsByClassName('.box-category-mobile');
+
+    btnCategoryMusicMobile.forEach((btnCategoryMusicMobileItem,index) => {
+        btnCategoryMusicMobileItem.addEventListener('click', function handleClick(event) {
+            boxCategoryMobile[index].classList.toggle("hidden");
+            console.log('>>>>>>>>>>>',)
+        });
+    });
+
+    const dropDownMusicMobile = (e) => {
+        boxCategoryMobile[1].classList.remove("hidden");
     }
 
     return (
@@ -191,30 +206,36 @@ const Home = () => {
                     <p className='text-[#F5F5F5] text-[14px] mb-[0.5rem] font-[700] px-[1rem]'>اخرین رایگان ها</p>
 
                     {lastFreeSound?.data.map(data => (
-                        <section className='px-[1rem]'>
-                            <div className='flex justify-between w-full px-[1rem] my-[0.5rem] rounded-full'>
-                                <div className='w-[15%] min-w-[15%] flex items-center'>
-                                    <Link className='text-[#1F1F1F] w-[70%] h-min bg-[#1DB954] flex items-center justify-center px-[1rem] py-[0.5rem] rounded-full'>
-                                        <svg className='ml-[0.3rem]' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <section className='px-[1rem]' key={Math.random()}>
+                            <div className='box-music flex justify-between w-full lg:px-[1rem] my-[0.5rem] rounded-full'>
+                                <button onClick={(e) => dropDownMusicMobile(1)} className='ml-[1rem] btn-category-music-mobile block lg:hidden'>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+
+                                <div className='w-[30%] lg:w-[15%] min-w-[15%] flex items-center'>
+                                    <Link className='text-[#1F1F1F] min-w-[2.5rem] w-[2.5rem] lg:w-[70%] h-min bg-[#1DB954] flex items-center justify-center lg:px-[1rem] py-[0.5rem] rounded-full'>
+                                        <svg className='lg:ml-[0.3rem]' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0059 4.49982C13.0059 3.94753 12.5581 3.49982 12.0059 3.49982C11.4536 3.49982 11.0059 3.94753 11.0059 4.49982L11.0059 10.9999L10.4116 10.9998C10.236 10.9997 10.0203 10.9996 9.84387 11.0216L9.84053 11.022C9.71408 11.0378 9.13804 11.1096 8.86368 11.6752C8.58872 12.2421 8.89065 12.7422 8.95597 12.8504L8.95841 12.8544C9.05062 13.0075 9.18477 13.1783 9.29511 13.3189L9.31885 13.3491C9.61348 13.725 9.99545 14.2092 10.3759 14.6002C10.5657 14.7953 10.783 14.9965 11.0139 15.1554C11.2191 15.2966 11.5693 15.4999 12 15.4999C12.4307 15.4999 12.7809 15.2966 12.9861 15.1554C13.217 14.9965 13.4343 14.7953 13.6241 14.6002C14.0046 14.2092 14.3865 13.725 14.6812 13.3491L14.7049 13.3189C14.8152 13.1784 14.9494 13.0075 15.0416 12.8544L15.044 12.8504C15.1093 12.7422 15.4113 12.2421 15.1363 11.6752C14.862 11.1096 14.2859 11.0378 14.1595 11.022L14.1561 11.0216C13.9797 10.9996 13.764 10.9997 13.5884 10.9998L13.0059 10.9999L13.0059 4.49982Z" fill="#1F1F1F"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4 15.5C4.55228 15.5 5 15.9477 5 16.5C5 17.0989 5.03256 17.5106 5.09643 17.8013C5.15781 18.0807 5.23372 18.181 5.27636 18.2236C5.31899 18.2663 5.41933 18.3422 5.69872 18.4036C5.98944 18.4674 6.40114 18.5 7 18.5L17 18.5C17.5989 18.5 18.0106 18.4674 18.3013 18.4036C18.5807 18.3422 18.681 18.2663 18.7236 18.2236C18.7663 18.181 18.8422 18.0807 18.9036 17.8013C18.9674 17.5106 19 17.0989 19 16.5C19 15.9477 19.4477 15.5 20 15.5C20.5523 15.5 21 15.9477 21 16.5C21 17.1421 20.9678 17.7259 20.857 18.2304C20.7437 18.7462 20.535 19.2407 20.1379 19.6379C19.7407 20.035 19.2462 20.2437 18.7304 20.357C18.2259 20.4678 17.6421 20.5 17 20.5L7 20.5C6.35786 20.5 5.77406 20.4678 5.26959 20.357C4.7538 20.2437 4.25926 20.035 3.86214 19.6379C3.46503 19.2407 3.25632 18.7462 3.14301 18.2304C3.03219 17.7259 3 17.1421 3 16.5C3 15.9477 3.44772 15.5 4 15.5Z" fill="#1F1F1F"/>
                                         </svg>
 
-                                        <span>دانلود</span>
+                                        <span className='hidden lg:block'>دانلود</span>
                                     </Link>
 
-                                    <button className='h-min'>
+                                    <button className='h-min hidden lg:block'>
                                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12 25.9808L12 17.7075C12 14.0742 12 12.2575 13.1716 11.1287C14.3431 10 16.2288 10 20 10C23.7712 10 25.6569 10 26.8284 11.1287C28 12.2575 28 14.0742 28 17.7075V25.9808C28 28.2867 28 29.4396 27.2272 29.8523C25.7305 30.6514 22.9232 27.9852 21.59 27.1824C20.8168 26.7168 20.4302 26.484 20 26.484C19.5698 26.484 19.1832 26.7168 18.41 27.1824C17.0768 27.9852 14.2695 30.6514 12.7728 29.8523C12 29.4396 12 28.2867 12 25.9808Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </button>
                                 </div>
 
-                                <div className='w-[35%] flex items-center'>
+                                <div className='w-[100%] hidden lg:flex items-center'>
                                     <MusicWave apiUrl={'https://api.mrseda.com/api/v1/sounds/thumbnail/' + data?.id} id={data?.id} />
                                 </div>
 
-                                <div className='w-[20%] flex items-center text-[#BFBFBF]'>
+                                <div className='w-[20%] min-w-[20%] mr-[1rem] hidden lg:flex items-center text-[#BFBFBF]'>
                                     <div className='flex items-center justify-center'>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="0.4" d="M2 8C2 8 6.47715 3 12 3C17.5228 3 22 8 22 8" stroke="#BFBFBF" stroke-width="1.5" stroke-linecap="round"/>
@@ -246,7 +267,7 @@ const Home = () => {
                                     </div>
                                 </div>
 
-                                <div className='w-[15%] flex items-center'>
+                                <div className='w-[70%] lg:w-[15%] min-w-[15%] mr-[1rem] flex items-center'>
                                     <button onClick={() => playMusic(lastFreeSound?.data,data)} className='cursor-pointer flex w-full'>
                                         <div className='w-full flex flex-col justify-center items-end ml-[1rem]'>
                                             <div className='!text-[#F5F5F5] font-bold'>
@@ -256,13 +277,33 @@ const Home = () => {
                                             <div className='!text-[#FFFFFF] text-[14px]'>
                                                 <span>{data?.creator}</span>
                                             </div>
+
+                                            <div className='flex lg:hidden'>
+                                                <div className='flex !text-[12px] !text-[#BFBFBF]'>
+                                                    <span className='ml-[0.4rem] mt-[0.1rem]'>{data?.views}</span>
+
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path opacity="0.4" d="M1.33317 5.33333C1.33317 5.33333 4.31794 2 7.99984 2C11.6817 2 14.6665 5.33333 14.6665 5.33333" stroke="#BFBFBF" stroke-linecap="round"/>
+                                                        <path d="M14.3626 8.69662C14.5652 8.98083 14.6666 9.12294 14.6666 9.33329C14.6666 9.54365 14.5652 9.68576 14.3626 9.96997C13.4519 11.247 11.1261 14 7.99992 14C4.87377 14 2.54798 11.247 1.63728 9.96997C1.43459 9.68576 1.33325 9.54365 1.33325 9.33329C1.33325 9.12294 1.43459 8.98083 1.63728 8.69662C2.54798 7.41959 4.87377 4.66663 7.99992 4.66663C11.1261 4.66663 13.4519 7.41959 14.3626 8.69662Z" stroke="#BFBFBF"/>
+                                                        <path opacity="0.4" d="M10 9.33337C10 8.2288 9.10457 7.33337 8 7.33337C6.89543 7.33337 6 8.2288 6 9.33337C6 10.4379 6.89543 11.3334 8 11.3334C9.10457 11.3334 10 10.4379 10 9.33337Z" stroke="#BFBFBF"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div className='w-[3.5rem] min-w-[3.5rem] h-[3.5rem]'>
+                                        <div className='w-[3.5rem] min-w-[3.5rem] h-[3.5rem] relative flex justify-center items-center'>
                                             <img className='rounded-full w-full h-full' src={data?.cover?.thumbnail} />
+
+                                            <svg className='absolute play-icon-box-music hidden' width="38" height="39" viewBox="0 0 38 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.97913 19.5C1.97913 10.0997 9.59961 2.47919 19 2.47919C28.4003 2.47919 36.0208 10.0997 36.0208 19.5C36.0208 28.9004 28.4003 36.5209 19 36.5209C9.59961 36.5209 1.97913 28.9004 1.97913 19.5ZM21.386 14.7286L21.5152 14.8086L21.5153 14.8086C22.5946 15.4763 23.4945 16.0329 24.1466 16.5516C24.8179 17.0855 25.4091 17.7166 25.6216 18.5962C25.765 19.1891 25.765 19.8113 25.6216 20.4043C25.4091 21.2839 24.8179 21.915 24.1466 22.4489C23.4945 22.9676 22.5946 23.5242 21.5153 24.1919L21.5152 24.1919L21.386 24.2719C20.3463 24.9151 19.4738 25.4548 18.7501 25.79C18.0161 26.13 17.1792 26.3865 16.3064 26.1172C15.7295 25.9392 15.2171 25.6051 14.8123 25.1605C14.2235 24.5136 14.0294 23.6681 13.9416 22.8231C13.8541 21.981 13.8541 20.8931 13.8541 19.5683V19.4322C13.8541 18.1074 13.8541 17.0194 13.9416 16.1773C14.0294 15.3323 14.2235 14.4869 14.8123 13.84C15.2171 13.3953 15.7295 13.0613 16.3064 12.8833C17.1792 12.614 18.0161 12.8705 18.7501 13.2104C19.4739 13.5456 20.3463 14.0854 21.386 14.7286Z" fill="white"/>
+                                            </svg>
                                         </div>
                                     </button>
                                 </div>
+                            </div>
+
+                            <div className='box-category-music-mobile hidden'>
+                                ss
                             </div>
                         </section>
                     ))}
