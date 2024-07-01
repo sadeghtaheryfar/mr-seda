@@ -49,18 +49,19 @@ const Home = () => {
     }
 
 
-    var btnCategoryMusicMobile = document.querySelectorAll('.btn-category-music-mobile');
-    var boxCategoryMobile = document.getElementsByClassName('.box-category-mobile');
+    // var btnCategoryMusicMobile = document.querySelectorAll('.btn-category-music-mobile');
+    // var boxCategoryMobile = document.getElementsByClassName('.box-category-mobile');
 
-    btnCategoryMusicMobile.forEach((btnCategoryMusicMobileItem,index) => {
-        btnCategoryMusicMobileItem.addEventListener('click', function handleClick(event) {
-            boxCategoryMobile[index].classList.toggle("hidden");
-            console.log('>>>>>>>>>>>',)
-        });
-    });
+    // btnCategoryMusicMobile.forEach((btnCategoryMusicMobileItem,index) => {
+    //     btnCategoryMusicMobileItem.addEventListener('click', function handleClick(event) {
+    //         boxCategoryMobile[index].classList.toggle("hidden");
+    //         console.log('>>>>>>>>>>>',)
+    //     });
+    // });
 
-    const dropDownMusicMobile = (e) => {
-        boxCategoryMobile[1].classList.remove("hidden");
+    const dropDownMusicMobile = (e,d) => {
+        document.getElementById('box-category-music-mobile' + e).classList.toggle('hidden');
+        d.target.classList.toggle('rotate-180');
     }
 
     return (
@@ -208,7 +209,7 @@ const Home = () => {
                     {lastFreeSound?.data.map(data => (
                         <section className='px-[1rem]' key={Math.random()}>
                             <div className='box-music flex justify-between w-full lg:px-[1rem] my-[0.5rem] rounded-full'>
-                                <button onClick={(e) => dropDownMusicMobile(1)} className='ml-[1rem] btn-category-music-mobile block lg:hidden'>
+                                <button onClick={(e) => dropDownMusicMobile(data?.id,e)} className='ml-[1rem] btn-category-music-mobile block lg:hidden'>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -302,8 +303,22 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <div className='box-category-music-mobile hidden'>
-                                ss
+                            <div id={'box-category-music-mobile' + data?.id} className='flex justify-between items-center hidden bg-[#1F1F1F] rounded-[0.5rem] mt-[0.5rem] px-[1rem] py-[0.5rem]'>
+                                <div className='border w-[2.5rem] h-[2.5rem] border-[#434343] rounded-[0.5rem] flex justify-center items-center'>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 17.9808L4 9.70753C4 6.07416 4 4.25748 5.17157 3.12874C6.34315 2 8.22876 2 12 2C15.7712 2 17.6569 2 18.8284 3.12874C20 4.25748 20 6.07416 20 9.70753V17.9808C20 20.2867 20 21.4396 19.2272 21.8523C17.7305 22.6514 14.9232 19.9852 13.59 19.1824C12.8168 18.7168 12.4302 18.484 12 18.484C11.5698 18.484 11.1832 18.7168 10.41 19.1824C9.0768 19.9852 6.26947 22.6514 4.77285 21.8523C4 21.4396 4 20.2867 4 17.9808Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+
+                                <div className='flex justify-center items-center mr-[0.5rem]'>
+                                    <div className='w-full mx-[0.25rem] bg-[#121212] px-[0.5rem] py-[0.2rem] rounded-full flex justify-center items-center'>
+                                        <p>romantic</p>
+                                    </div>
+
+                                    <div className='w-full mx-[0.25rem] bg-[#121212] px-[0.5rem] py-[0.2rem] rounded-full flex justify-center items-center'>
+                                        <p>piano</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     ))}

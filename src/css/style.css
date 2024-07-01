@@ -165,9 +165,26 @@ textarea:focus{
 }
 
 
+#box-music-player-mobile{
+    display: none !important;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+    transition: 0.3s;
+    top: 100vh;
+    right: 0;
+    background-color: #1F1F1F;
+}
+
+
 @media screen and (max-width:1024px) {
     #main-header{
         height: 9.25rem;
+    }
+
+    #box-music-player-mobile {
+        display: block !important;
     }
 
     #sidbar-main{
@@ -204,5 +221,9 @@ textarea:focus{
     
     .play-icon-box-music{
         display: flex !important;
+    }
+
+    .btn-category-music-mobile{
+        transition: 0.3s;
     }
 }

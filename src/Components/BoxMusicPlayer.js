@@ -140,14 +140,50 @@ const BoxMusicPlayer = ({ songs }) => {
         }
     }
 
+    const ShowMusicPlayerMobile = (e) => {
+        document.getElementById('box-music-player-mobile').classList.toggle('!top-0');
+    }
+
     return (
         <>
-            <div id='box-loding-music'>
+            <div id='box-loding-music' className='hidden'>
                 <LodingTop />
             </div>
 
-            <section id='box-music-popup' className='flex items-center'>
-                <div className='flex items-center'>
+            <section id='box-music-popup' className='flex items-center' onClick={ShowMusicPlayerMobile}>
+                <div className='flex justify-start items-center lg:hidden'>
+                    {!isLoading && (
+                        <button onClick={togglePlay} className='mx-[0.5rem]'>
+                            {(isPlaying) ? (
+                                <svg width="35" height="35" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M35.3136 6.77082L35.4165 6.77082L35.5194 6.77082C36.9045 6.77074 38.098 6.77067 39.0537 6.89917C40.0779 7.03687 41.0597 7.34741 41.8561 8.14376C42.6524 8.9401 42.963 9.9219 43.1007 10.9461C43.2292 11.9019 43.2291 13.0953 43.229 14.4805L43.229 35.5195C43.2291 36.9046 43.2292 38.0981 43.1007 39.0538C42.963 40.0781 42.6524 41.0599 41.8561 41.8562C41.0597 42.6526 40.0779 42.9631 39.0537 43.1008C38.098 43.2293 36.9045 43.2292 35.5194 43.2292H35.3137C33.9285 43.2292 32.7351 43.2293 31.7793 43.1008C30.7551 42.9631 29.7733 42.6526 28.9769 41.8562C28.1806 41.0599 27.8701 40.0781 27.7324 39.0538C27.6039 38.0981 27.6039 36.9047 27.604 35.5195L27.604 14.4805C27.6039 13.0953 27.6039 11.9019 27.7324 10.9461C27.8701 9.9219 28.1806 8.9401 28.9769 8.14376C29.7733 7.34741 30.7551 7.03687 31.7793 6.89917C32.7351 6.77067 33.9285 6.77074 35.3136 6.77082Z" fill="#F5F5F5"/>
+                                    <path d="M14.4806 6.77082L14.5835 6.77082L14.6864 6.77082C16.0715 6.77074 17.265 6.77067 18.2207 6.89917C19.2449 7.03687 20.2267 7.34741 21.0231 8.14376C21.8194 8.9401 22.13 9.9219 22.2677 10.9461C22.3962 11.9019 22.3961 13.0953 22.396 14.4805L22.396 35.5195C22.3961 36.9046 22.3962 38.0981 22.2677 39.0538C22.13 40.0781 21.8194 41.0599 21.0231 41.8562C20.2267 42.6526 19.2449 42.9631 18.2207 43.1008C17.265 43.2293 16.0715 43.2292 14.6864 43.2292H14.4807C13.0955 43.2292 11.9021 43.2293 10.9463 43.1008C9.92209 42.9631 8.94029 42.6526 8.14394 41.8562C7.34759 41.0599 7.03705 40.0781 6.89935 39.0538C6.77086 38.0981 6.77092 36.9047 6.771 35.5195L6.771 14.4805C6.77092 13.0953 6.77086 11.9019 6.89935 10.9461C7.03705 9.9219 7.34759 8.9401 8.14394 8.14376C8.94029 7.34741 9.92209 7.03687 10.9463 6.89917C11.902 6.77067 13.0955 6.77074 14.4806 6.77082Z" fill="#F5F5F5"/>
+                                </svg>
+                            ) :  (
+                                <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.33 9.24145C22.7114 10.5943 24.5827 11.6575 25.9159 12.6313C27.2583 13.6119 28.251 14.6368 28.6066 15.9879C28.8674 16.9788 28.8674 18.0212 28.6066 19.0121C28.251 20.3632 27.2583 21.3881 25.9159 22.3687C24.5828 23.3425 22.7114 24.4056 20.3301 25.7585C18.0297 27.0654 16.0899 28.1675 14.6173 28.7938C13.1328 29.4252 11.7795 29.7453 10.4641 29.3725C9.49751 29.0986 8.61797 28.5787 7.90945 27.8639C6.94786 26.8937 6.56187 25.5528 6.37925 23.9391C6.19797 22.3372 6.19798 20.2402 6.198 17.5731V17.5731V17.4269V17.4269C6.19798 14.7598 6.19797 12.6628 6.37925 11.0609C6.56187 9.44722 6.94786 8.10631 7.90944 7.13614C8.61797 6.42129 9.49751 5.90138 10.4641 5.62746C11.7795 5.25474 13.1328 5.57476 14.6173 6.20616C16.0899 6.83252 18.0297 7.93456 20.33 9.24145Z" fill="white"/>
+                                </svg>
+                            )}
+                        </button>
+                    )}
+
+                    <Link className='text-[#1F1F1F] min-w-[2.5rem] w-[2.5rem] lg:w-[70%] h-min bg-[#1DB954] flex items-center justify-center lg:px-[1rem] py-[0.5rem] rounded-full'>
+                        <svg className='lg:ml-[0.3rem]' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0059 4.49982C13.0059 3.94753 12.5581 3.49982 12.0059 3.49982C11.4536 3.49982 11.0059 3.94753 11.0059 4.49982L11.0059 10.9999L10.4116 10.9998C10.236 10.9997 10.0203 10.9996 9.84387 11.0216L9.84053 11.022C9.71408 11.0378 9.13804 11.1096 8.86368 11.6752C8.58872 12.2421 8.89065 12.7422 8.95597 12.8504L8.95841 12.8544C9.05062 13.0075 9.18477 13.1783 9.29511 13.3189L9.31885 13.3491C9.61348 13.725 9.99545 14.2092 10.3759 14.6002C10.5657 14.7953 10.783 14.9965 11.0139 15.1554C11.2191 15.2966 11.5693 15.4999 12 15.4999C12.4307 15.4999 12.7809 15.2966 12.9861 15.1554C13.217 14.9965 13.4343 14.7953 13.6241 14.6002C14.0046 14.2092 14.3865 13.725 14.6812 13.3491L14.7049 13.3189C14.8152 13.1784 14.9494 13.0075 15.0416 12.8544L15.044 12.8504C15.1093 12.7422 15.4113 12.2421 15.1363 11.6752C14.862 11.1096 14.2859 11.0378 14.1595 11.022L14.1561 11.0216C13.9797 10.9996 13.764 10.9997 13.5884 10.9998L13.0059 10.9999L13.0059 4.49982Z" fill="#1F1F1F"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 15.5C4.55228 15.5 5 15.9477 5 16.5C5 17.0989 5.03256 17.5106 5.09643 17.8013C5.15781 18.0807 5.23372 18.181 5.27636 18.2236C5.31899 18.2663 5.41933 18.3422 5.69872 18.4036C5.98944 18.4674 6.40114 18.5 7 18.5L17 18.5C17.5989 18.5 18.0106 18.4674 18.3013 18.4036C18.5807 18.3422 18.681 18.2663 18.7236 18.2236C18.7663 18.181 18.8422 18.0807 18.9036 17.8013C18.9674 17.5106 19 17.0989 19 16.5C19 15.9477 19.4477 15.5 20 15.5C20.5523 15.5 21 15.9477 21 16.5C21 17.1421 20.9678 17.7259 20.857 18.2304C20.7437 18.7462 20.535 19.2407 20.1379 19.6379C19.7407 20.035 19.2462 20.2437 18.7304 20.357C18.2259 20.4678 17.6421 20.5 17 20.5L7 20.5C6.35786 20.5 5.77406 20.4678 5.26959 20.357C4.7538 20.2437 4.25926 20.035 3.86214 19.6379C3.46503 19.2407 3.25632 18.7462 3.14301 18.2304C3.03219 17.7259 3 17.1421 3 16.5C3 15.9477 3.44772 15.5 4 15.5Z" fill="#1F1F1F"/>
+                        </svg>
+
+                        <span className='hidden lg:block'>دانلود</span>
+                    </Link>
+
+                    <button className='h-min'>
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 25.9808L12 17.7075C12 14.0742 12 12.2575 13.1716 11.1287C14.3431 10 16.2288 10 20 10C23.7712 10 25.6569 10 26.8284 11.1287C28 12.2575 28 14.0742 28 17.7075V25.9808C28 28.2867 28 29.4396 27.2272 29.8523C25.7305 30.6514 22.9232 27.9852 21.59 27.1824C20.8168 26.7168 20.4302 26.484 20 26.484C19.5698 26.484 19.1832 26.7168 18.41 27.1824C17.0768 27.9852 14.2695 30.6514 12.7728 29.8523C12 29.4396 12 28.2867 12 25.9808Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div className='hidden lg:flex items-center'>
                     <Link className='text-[#1F1F1F] w-[8rem] h-min bg-[#1DB954] flex items-center justify-center px-[1rem] py-[0.5rem] rounded-full'>
                         <svg className='ml-[0.3rem]' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0059 4.49982C13.0059 3.94753 12.5581 3.49982 12.0059 3.49982C11.4536 3.49982 11.0059 3.94753 11.0059 4.49982L11.0059 10.9999L10.4116 10.9998C10.236 10.9997 10.0203 10.9996 9.84387 11.0216L9.84053 11.022C9.71408 11.0378 9.13804 11.1096 8.86368 11.6752C8.58872 12.2421 8.89065 12.7422 8.95597 12.8504L8.95841 12.8544C9.05062 13.0075 9.18477 13.1783 9.29511 13.3189L9.31885 13.3491C9.61348 13.725 9.99545 14.2092 10.3759 14.6002C10.5657 14.7953 10.783 14.9965 11.0139 15.1554C11.2191 15.2966 11.5693 15.4999 12 15.4999C12.4307 15.4999 12.7809 15.2966 12.9861 15.1554C13.217 14.9965 13.4343 14.7953 13.6241 14.6002C14.0046 14.2092 14.3865 13.725 14.6812 13.3491L14.7049 13.3189C14.8152 13.1784 14.9494 13.0075 15.0416 12.8544L15.044 12.8504C15.1093 12.7422 15.4113 12.2421 15.1363 11.6752C14.862 11.1096 14.2859 11.0378 14.1595 11.022L14.1561 11.0216C13.9797 10.9996 13.764 10.9997 13.5884 10.9998L13.0059 10.9999L13.0059 4.49982Z" fill="#1F1F1F"/>
@@ -164,7 +200,7 @@ const BoxMusicPlayer = ({ songs }) => {
                     </button>
                 </div>
 
-                <div className='mx-[1rem] relative flex justify-center items-center' onMouseMove={chengevolumBoxShow} onMouseOut={chengevolumBoxHidden}>
+                <div className='mx-[1rem] relative hidden lg:flex justify-center items-center' onMouseMove={chengevolumBoxShow} onMouseOut={chengevolumBoxHidden}>
                     <button onClick={muteVolumbtn} id='icon-chenge-volum' className='w-[3.5rem] h-[2.5rem] bg-[#121212] rounded-full flex justify-center items-center relative z-[1]'>
                         {(volume > 0.7) ? (
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -211,23 +247,23 @@ const BoxMusicPlayer = ({ songs }) => {
                 </div>
 
                 {!isLoading && (
-                    <div className='bg-[#121212] mx-[1rem] py-[0.25rem] px-[0.5rem] rounded-full text-[12px] flex justify-center items-center'>
+                    <div className='bg-[#121212] mx-[1rem] py-[0.25rem] px-[0.5rem] rounded-full text-[12px] hidden lg:flex justify-center items-center'>
                         <span className='mt-[0.1rem]'>{formatTime(duration)}</span>
                     </div>
                 )}
 
-                <div className='w-full'>
+                <div className='w-full lg:block hidden'>
                     <div id="waveform"></div>
                 </div>
 
                 {!isLoading && (
-                    <div className='bg-[#121212] mx-[1rem] py-[0.25rem] px-[0.5rem] rounded-full text-[12px] flex justify-center items-center'>
+                    <div className='bg-[#121212] mx-[1rem] py-[0.25rem] px-[0.5rem] rounded-full text-[12px] hidden lg:flex justify-center items-center'>
                         <span className='mt-[0.1rem]'>{formatTime(currentTime)}</span>
                     </div>
                 )}
 
                 {!isLoading && (
-                    <div className='flex justify-center items-center'>
+                    <div className='hidden lg:flex justify-center items-center'>
                         <button onClick={playNextSong} className='mx-[0.5rem]'>
                             <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M18.7698 10.9117L18.9112 11.0027C20.9958 12.3428 22.6525 13.4079 23.8298 14.3823C25.0274 15.3737 25.911 16.4142 26.1946 17.7652C26.3655 18.5789 26.3655 19.4211 26.1946 20.2347C25.911 21.5857 25.0274 22.6263 23.8298 23.6176C22.6526 24.5921 20.9959 25.6571 18.9113 26.9972L18.7698 27.0882C16.5 28.5474 14.7024 29.7031 13.2356 30.4118C11.7597 31.1248 10.3568 31.5205 8.97133 31.0969C8.15417 30.847 7.40587 30.4089 6.78071 29.8193C5.73448 28.8325 5.32874 27.4148 5.13792 25.7402C4.94772 24.071 4.94774 21.8717 4.94775 19.0805V18.9195C4.94774 16.1283 4.94772 13.9289 5.13792 12.2598C5.32874 10.5852 5.73448 9.16749 6.78071 8.18067C7.40587 7.59101 8.15417 7.15294 8.97133 6.90307C10.3568 6.47943 11.7597 6.87513 13.2356 7.58817C14.7023 8.29681 16.5 9.45249 18.7698 10.9117Z" fill="#F5F5F5"/>
@@ -257,8 +293,8 @@ const BoxMusicPlayer = ({ songs }) => {
                     </div>
                 )}
 
-                <div>
-                    <div className='flex w-min mr-[1rem] pr-[1rem] border-r border-[#434343] my-[0.5rem]'>
+                <div className='lg:w-auto w-full flex justify-end items-center'>
+                    <div className='flex w-min mr-[1rem] pr-[1rem] lg:border-r border-[#434343] my-[0.5rem]'>
                         <div className='flex min-w-[6rem] flex-col justify-center items-end ml-[1rem]'>
                             <div className='!text-[#F5F5F5] font-bold'>
                                 <span>{musicData?.title}</span>
@@ -273,6 +309,17 @@ const BoxMusicPlayer = ({ songs }) => {
                             <img className='rounded-full w-full h-full' src={musicData?.cover} />
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section id='box-music-player-mobile' className='p-[1rem]'>
+                <div className='w-full'>
+                    <button onClick={ShowMusicPlayerMobile} className='bg-[#262626] p-[0.5rem] flex items-center justify-center rounded-full'>
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.4223 5.49994L5.42235 19.4999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.42235 5.49994L19.4223 19.4999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
             </section>
         </>
